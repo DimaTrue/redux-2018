@@ -4,8 +4,10 @@ import {string} from 'prop-types';
 const getVideoId = (url) => url.split('/')[3];
 const createVideoUrl = (id) => `https://www.youtube.com/embed/${id}`;
 
+
 const VIEW_MODE = 'VIEW_MODE';
 const EDIT_MODE = 'EDIT_MODE';
+
 
 export default class ListItem extends PureComponent {
     static propTypes = {
@@ -34,13 +36,22 @@ delete = () => {
         const videoUrl = createVideoUrl(videoId);
 
         return (
-            <li>
-                mode: {this.state.mode}
+            this.state.mode === VIEW_MODE ?
+           <li>
+                mode: {VIEW_MODE}
                 <div className="title">{title}</div>
                 <iframe src={videoUrl} title={title} />
-                <span onClick={this.switchMode}>&#9998;</span>
-                <button onClick={this.delete}>Delete</button>
-            </li>
+                <div onClick={this.switchMode}>&#9998;</div>
+            </li> :
+
+             <li>
+             mode: {EDIT_MODE}
+             <div className="title">{title}</div>
+             <iframe src={videoUrl} title={title} />
+             <div onClick={this.switchMode}>&#9998;</div>
+             <button onClick={this.delete}>Edit</button>
+             <button onClick={this.delete}>Delete</button>
+         </li>
         );
     }
 }
