@@ -4,20 +4,20 @@ const videosSelector = state => state.videos;
 const searchSelector = state => state.search;
 
 export const filteredVideos = createSelector(
-    [videosSelector, searchSelector],
-    (videos, search) => (
-        videos.filter((video) => {
-            const criteriaKeys = Object.keys(search);
+  [videosSelector, searchSelector],
+  (videos, search) => (
+    videos.filter((video) => {
+      const criteriaKeys = Object.keys(search);
 
-            return criteriaKeys.every((criteriaKey) => {
-                const criteriaValue = search[criteriaKey];
+      return criteriaKeys.every((criteriaKey) => {
+        const criteriaValue = search[criteriaKey];
 
-                if (criteriaValue.length < 2) {
-                    return true;
-                }
+        if (criteriaValue.length < 2) {
+          return true;
+        }
 
-                return video[criteriaKey].includes(criteriaValue);
-            })
-        })
-    )
+        return video[criteriaKey].includes(criteriaValue);
+      })
+    })
+  )
 );
